@@ -4,4 +4,6 @@
 
 - clone the repository 
 - npm install 
-- npm run start
+- node app.js
+
+![jobscraper](https://github.com/yenaingtun-dev/job-scraper/assets/59411234/c011ba5b-2524-4934-9fbf-53d472abbdd8)
