@@ -5,6 +5,7 @@ const express = require("express");
 const app = express();
 const jobnet = "https://www.jobnet.com.mm/jobs?kw=web+developer";
 const jobinyangon = "https://www.jobsinyangon.com/app/job-search?jobtype=542017072331869&region=17&send=1&reset_filtr=1&lang=en";
+const joi = "https://joimyanmar.com/job/filter?category%5B%5D=8";
 
 axios(jobnet)
   .then((response) => {
@@ -23,22 +24,42 @@ axios(jobnet)
     console.log(err);
   });
 
-axios(jobinyangon)
-    .then((response) => {
-        const html1 = response.data;
-        const $ = cheerio.load(html1);
-        const articles2 = [];
+// axios(jobinyangon)
+//     .then((response) => {
+//         const html1 = response.data;
+//         const $ = cheerio.load(html1);
+//         const articles2 = [];
 
-        $(".col-lg-4", html1).each(function () {
-            const title = $(this).text();
-            // const date = $(".col-lg-12 > strong:first").text();
-            const url = 'https://www.jobsinyangon.com/app/' + $(this).find('a').attr("href");
-            articles2.push({title, url});
-        });
-        console.log(articles2);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+//         $(".col-lg-4", html1).each(function () {
+//             const title = $(this).text();
+//             // const date = $(".col-lg-12 > strong:first").text();
+//             const url = 'https://www.jobsinyangon.com/app/' + $(this).find('a').attr("href");
+//             articles2.push({title, url});
+//         });
+//         console.log(articles2);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
+
+// axios(joi)
+//     .then((response) => {
+//         const html1 = response.data;
+//         const $ = cheerio.load(html1);
+//         const articles2 = [];
+
+//         // console.log(html1);
+
+//         $(".job-card__top > h3", html1).each(function () {
+//             const title = $(this).text();
+//             // const date = $(".col-lg-12 > strong:first").text();
+//             const url = 'https://joimyanmar.com/job/' + $(this).find('a').attr("href");
+//             articles2.push({title, url});
+//         });
+//         // console.log(articles2);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
 
 app.listen(PORT, () => console.log(`server running on port ${PORT}`));
