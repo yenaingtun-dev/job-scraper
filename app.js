@@ -6,6 +6,7 @@ const app = express();
 const jobnet = "https://www.jobnet.com.mm/jobs?kw=web+developer";
 const jobinyangon = "https://www.jobsinyangon.com/app/job-search?jobtype=542017072331869&region=17&send=1&reset_filtr=1&lang=en";
 const joi = "https://joimyanmar.com/job/filter?category%5B%5D=8";
+const myworld = "https://www.myworld.com.mm/jobs/it-and-telecommunication";
 
 axios(jobnet)
   .then((response) => {
@@ -42,24 +43,44 @@ axios(jobnet)
 //         console.log(err);
 //     });
 
-// axios(joi)
-//     .then((response) => {
-//         const html1 = response.data;
-//         const $ = cheerio.load(html1);
-//         const articles2 = [];
+axios(joi)
+    .then((response) => {
+        const html1 = response.data;
+        const $ = cheerio.load(html1);
+        const articles2 = [];
 
-//         // console.log(html1);
+        // console.log(html1);
 
-//         $(".job-card__top > h3", html1).each(function () {
-//             const title = $(this).text();
-//             // const date = $(".col-lg-12 > strong:first").text();
-//             const url = 'https://joimyanmar.com/job/' + $(this).find('a').attr("href");
-//             articles2.push({title, url});
-//         });
-//         // console.log(articles2);
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
+        $(".job-card__top > h3", html1).each(function () {
+            const title = $(this).text();
+            // const date = $(".col-lg-12 > strong:first").text();
+            const url = 'https://joimyanmar.com/job/' + $(this).find('a').attr("href");
+            articles2.push({title, url});
+        });
+        // console.log(articles2);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+
+axios(myworld)
+    .then((response) => {
+        const html1 = response.data;
+        const $ = cheerio.load(html1);
+        const articles2 = [];
+
+        console.log(html1);
+
+        $(".job-card__top > h3", html1).each(function () {
+            const title = $(this).text();
+            // const date = $(".col-lg-12 > strong:first").text();
+            const url = 'https://www.myworld.com.mm/jobs/it-and-telecommunication' + $(this).find('a').attr("href");
+            articles2.push({title, url});
+        });
+        // console.log(articles2);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 app.listen(PORT, () => console.log(`server running on port ${PORT}`));
